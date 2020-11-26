@@ -16,7 +16,7 @@ with open(bot.path, 'r') as f:
 extensions = (
     'cogs.utility',
 )
-
+# jacob yup
 async def create_db_pool():
   bot.db = await asyncpg.create_pool(database="postgres", user="postgres", password=" ")
 
