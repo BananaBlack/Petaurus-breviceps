@@ -5,6 +5,7 @@ from discord.ext import commands
 import asyncpg
 import os
 import json
+import asyncio
 
 bot = commands.Bot(command_prefix='~', case_insensitive=True, owner_id=305731416812158979)
 bot.remove_command('help')
@@ -15,18 +16,19 @@ with open(bot.path, 'r') as f:
 
 extensions = (
     'cogs.utility',
+    'cogs.admin',
 )
-# jacob yup
+# jacob yup. no u
 async def create_db_pool():
   bot.db = await asyncpg.create_pool(database="postgres", user="postgres", password=" ")
 
-  if __name__ == '__main__':
-    for extension in extensions:
-      try:
-        bot.load_extension(extension)
-      except Exception as error:
-        print(f'{extension} cannot be loaded. [{error}]')
+if __name__ == '__main__':
+  for extension in extensions:
+    try:
+      bot.load_extension(extension)
+    except Exception as error:
+      print(f'{extension} cannot be loaded. [{error}]')
 
-bot.loop.run_until_complete(create_db_pool)
+bot.loop.run_until_complete(create_db_pool())
 
 bot.run(bot.utils["TOKEN"])
